@@ -21,10 +21,6 @@
 void main()
 {
 
-
-		
-
-
 	sfw::initContext(600, 600, "PUNISHMENT PONG");
 	sfw::setBackgroundColor(WHITE);
 

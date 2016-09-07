@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="Score.h" />
   </ItemGroup>
