@@ -20,8 +20,8 @@ ball create(float x, float y, float Velx, float Vely, float radius, unsigned int
 	ball retval;
 	retval.x = x;
 	retval.y = y;
-	retval.Velx = rand() % 10;
-	retval.Vely = rand() % 10;
+	retval.Velx = rand() % 40;
+	retval.Vely = rand() % 40;
 	retval.radius = radius;
 	retval.color = color;
 	return retval;
@@ -60,7 +60,7 @@ void updatPaddle(player &p)
 	if (p.Y > 600 - p.size) p.Y = 600 - p.size;
 	if (p.Y < 0) p.Y = 0;
 }
-void updateBall(ball &b )
+void updateBall(ball &b, player &p1, player &p2 )
 {
 	b.x += b.Velx;
 	b.y += b.Vely;
@@ -75,9 +75,26 @@ void updateBall(ball &b )
 		b.Vely *= -1;
 	}
 	
-	if (b.x < 0 || b.x > 600)
+	if (b.x < 0)
 	{
+		p1.score++;
+
+		printf("%d to %d /n", p1.score, p2.score);
+		b.x = 30;
+		b.y = 300;
+		
 		b.x = 300;
+		b.y = 300;
+	}
+	if (b.x > 600)
+	{
+		p2.score++;
+		printf("%d to %d \n", p1.score, p2.score);
+		b.x = 770;
+		b.y = 300;
+	
+		b.x = 300;
+		b.y = 300;
 	}
 
 	
@@ -97,23 +114,7 @@ void collision(ball &b, player &p1, player &p2)
 		b.Velx *= -1;
 		b.x = p2.X - b.radius;
 	}
-	if (b.x < 0)
-	{
-		p1.score++;
-		
-		printf("%d to %d /n", p1.score, p2.score);
-		b.x = 30;
-		b.y = 300;
-		b.Velx += -1;
-	}
-	if (b.x > 600)
-	{
-		p2.score++;
-		printf("%d to %d \n", p1.score, p2.score);
-		b.x = 770;
-		b.y = 300;
-		b.Velx *= -1;
-	}
+	
 
 
 
@@ -130,10 +131,10 @@ void drawScore(unsigned font, int p1score , int p2score )
 {
 	char buffer[64] = { 0 };
 	sprintf_s( buffer, "%d", p1score );
-	sfw::drawString(font, buffer, 650, 600, 40, 40);
+	sfw::drawString(font, buffer, 500, 550, 40, 40);
 
 	sprintf_s( buffer, "%d", p2score);
-	sfw::drawString(font, buffer, 100, 650, 40, 40);
+	sfw::drawString(font, buffer, 100, 550, 40, 40);
 }
 void drawWin(unsigned font)
 {
@@ -178,7 +179,7 @@ void main()
 		{
 			updatPaddle(p1);
 			updatPaddle(p2);
-			updateBall(b1);
+			updateBall(b1, p1, p2);
 			collision(b1, p1, p2);
 		}
 
