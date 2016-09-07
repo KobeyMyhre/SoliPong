@@ -10,7 +10,7 @@ void drawScore(unsigned font, int p1score, int p2score)
 	sfw::drawString(font, buffer, 500, 550, 40, 40);
 
 	sprintf_s(buffer, "%d", p2score);
-	sfw::drawString(font, buffer, 100, 550, 40, 40);
+	sfw::drawString(font, buffer, 100, 550, 40, 40);w
 }
 void drawWin(unsigned font)
 {
