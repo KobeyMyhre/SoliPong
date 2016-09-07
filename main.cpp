@@ -2,148 +2,21 @@
 #include "sfwdraw.h"
 #include <random>
 #include <iostream>
+#include <time.h>
+#include "Paddle.h"
+#include "Ball.h"
+#include "Score.h"
 //using namespace sfw;
 //using sfw::drawTexture;
 //sfw::drawTexture();
 
-struct ball
-{
-	float x = 300;
-	float y = 300;
-	float Velx;
-	float Vely;
-	float radius;
-	unsigned int color;
-};
-ball create(float x, float y, float Velx, float Vely, float radius, unsigned int color)
-{
-	ball retval;
-	retval.x = x;
-	retval.y = y;
-	retval.Velx = rand() % 40;
-	retval.Vely = rand() % 40;
-	retval.radius = radius;
-	retval.color = color;
-	return retval;
-}
-
-struct player
-{
-	float Y = 10;
-	float X = 10;
-	float size = 200;
-	char up; 
-	char down;
-	unsigned int color;
-	int score = 0;
-};
-
-player createPaddle(float Y, float X ,float size, char up, char down, unsigned int color)
-{
-	player retval;
-	retval.up = up;
-	retval.down = down;
-	retval.Y = Y;
-	retval.X = X;
-	retval.color = color;
-	
-	return retval;
-}
-void updatPaddle(player &p)
-{
-	
-	
-	if (sfw::getKey(p.up))
-		p.Y += 10;
-	if (sfw::getKey(p.down))
-		p.Y -= 10;
-	if (p.Y > 600 - p.size) p.Y = 600 - p.size;
-	if (p.Y < 0) p.Y = 0;
-}
-void updateBall(ball &b, player &p1, player &p2 )
-{
-	b.x += b.Velx;
-	b.y += b.Vely;
-	if (b.y > 600 - b.radius)
-	{
-		b.y = 600 - b.radius;
-		b.Vely *= -1;
-	}
-	if (b.y < 0)
-	{
-		b.y = 0;
-		b.Vely *= -1;
-	}
-	
-	if (b.x < 0)
-	{
-		p1.score++;
-
-		printf("%d to %d /n", p1.score, p2.score);
-		b.x = 30;
-		b.y = 300;
-		
-		b.x = 300;
-		b.y = 300;
-	}
-	if (b.x > 600)
-	{
-		p2.score++;
-		printf("%d to %d \n", p1.score, p2.score);
-		b.x = 770;
-		b.y = 300;
-	
-		b.x = 300;
-		b.y = 300;
-	}
-
-	
-
-
-}
-
-void collision(ball &b, player &p1, player &p2)
-{
-	if (b.x - b.radius < p1.X && b.y > p1.Y && b.y < (p1.Y+ p1.size))
-	{
-		b.Velx *= -1;
-		b.x = p1.X + b.radius;
-	}
-	if (b.x + b.radius > p2.X && b.y > p2.Y && b.y < (p2.Y + p2.size))
-	{
-		b.Velx *= -1;
-		b.x = p2.X - b.radius;
-	}
-	
 
 
 
-}
-void drawPaddle(const player &p)
-{
-	sfw::drawLine(p.X, p.size + p.Y, p.X, p.Y, p.color);
-}
-void drawBall(const ball &b)
-{
-	sfw::drawCircle(b.x, b.y, b.radius, 12, b.color);
-}
-void drawScore(unsigned font, int p1score , int p2score )
-{
-	char buffer[64] = { 0 };
-	sprintf_s( buffer, "%d", p1score );
-	sfw::drawString(font, buffer, 500, 550, 40, 40);
 
-	sprintf_s( buffer, "%d", p2score);
-	sfw::drawString(font, buffer, 100, 550, 40, 40);
-}
-void drawWin(unsigned font)
-{
-	sfw::drawString(font, "Game Over Player 1 Wins!", 160, 600, 20, 20);
-}
-void drawWin2(unsigned font)
-{
-	sfw::drawString(font, " Game Over Player 2 Wins!", 160, 600, 20, 20);
-}
+
+
+
 
 void main()
 {
@@ -152,7 +25,7 @@ void main()
 		
 
 
-	sfw::initContext(600, 600, "NEVER WORKS I HATE THIS");
+	sfw::initContext(600, 600, "PUNISHMENT PONG");
 	sfw::setBackgroundColor(WHITE);
 
 	unsigned f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
@@ -185,13 +58,13 @@ void main()
 
 		drawScore(d, p1.score, p2.score);
 
-		if (p1.score >= 10)
+		if (p1.score >= 50)
 		{
 			GameOver = true;
 			drawWin(d);
 		}
 		
-		if (p2.score >= 10)
+		if (p2.score >= 50)
 		{
 			GameOver = true;
 			drawWin2(d);
