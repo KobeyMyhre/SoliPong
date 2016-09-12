@@ -23,7 +23,9 @@ GameState createGameState()
 	 gs.d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
 	 gs.r = sfw::loadTextureMap("./res/background.jpg");
 	 gs.u = sfw::loadTextureMap("./res/crosshair.png");
-
+	 gs.font;
+	 gs.p1.score;
+	 gs.p2.score;
 	 return gs;
 }
 
