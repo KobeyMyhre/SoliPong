@@ -6,41 +6,61 @@
 #include "Paddle.h"
 #include "Ball.h"
 #include "Score.h"
-//using namespace sfw;
+#include "GameState.h"
+using namespace sfw;
 //using sfw::drawTexture;
 //sfw::drawTexture();
 
 
 
-
-
-
-
-
-
 void main()
 {
-
 	sfw::initContext(600, 600, "PUNISHMENT PONG");
 	sfw::setBackgroundColor(WHITE);
 
-	unsigned f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
-	unsigned d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
-	unsigned r = sfw::loadTextureMap("./res/background.jpg");
-	unsigned u = sfw::loadTextureMap("./res/crosshair.png");
-
-	//drawString(f, "Pong", 100, 600, 48, 48, 0, ' ');
-	
-
-	player p1 = createPaddle(300, 10,200, 'W', 'S', GREEN);
-	player p2 = createPaddle(300, 590,200,'I', 'K', RED);
-	ball b1 = create(300, 300, 1, 1, 15, CYAN);
-	
-
-
-	bool GameOver = false;
+	GameState gs = createGameState();
 
 	while (sfw::stepContext())
+	{
+	updateGameState(gs);
+
+	drawGameState(gs);
+	}
+	sfw::termContext();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//void main()
+//{
+//
+//	sfw::initContext(600, 600, "PUNISHMENT PONG");
+//	sfw::setBackgroundColor(WHITE);
+//
+//	unsigned f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
+//	unsigned d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
+//	unsigned r = sfw::loadTextureMap("./res/background.jpg");
+//	unsigned u = sfw::loadTextureMap("./res/crosshair.png");
+//
+//	//drawString(f, "Pong", 100, 600, 48, 48, 0, ' ');
+//	
+//	
+//
+	
+
+	/*while (sfw::stepContext())
 	{	
 		sfw::drawTexture(r, 0, 600, 600, 600, 0, false, 0, YELLOW);
 		
@@ -79,7 +99,7 @@ void main()
 	}
 	
 	
-}
+}*/
 
 
 
