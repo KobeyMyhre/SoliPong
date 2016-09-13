@@ -7,7 +7,7 @@
 #include "Ball.h"
 #include "Score.h"
 #include "GameState.h"
-using namespace sfw;
+
 //using sfw::drawTexture;
 //sfw::drawTexture();
 
@@ -16,23 +16,27 @@ using namespace sfw;
 void main()
 {
 	sfw::initContext(600, 600, "PUNISHMENT PONG");
-	
+	int	d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
+	int r = sfw::loadTextureMap("./res/background.jpg");
 
-	GameState gs = createGameState();
+	GameState gs;
+
+
+	gs.createGameState();
 
 	while (sfw::stepContext())
 	{
 		if (gs.GameOver == false)
 		{
-			updateGameState(gs);
+			gs.updateGameState();
 
 
-			drawGameState(gs);
+			gs.drawGameState();
 		}
 		else
 		{
 			sfw::setBackgroundColor(BLACK);
-			sfw::drawString(gs.d , "PLEASE INSERT 50 CREDITS TO CONTINUE", 30, 300, 15, 15,BLUE,0, GREEN);
+			sfw::drawString(d, "PLEASE INSERT 50 CREDITS TO CONTINUE", 30, 300, 15, 15,BLUE,0, GREEN);
 		}
 	}
 	sfw::termContext();

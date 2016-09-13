@@ -10,95 +10,116 @@ float randRange(int start, int end)
 	return rand() % (end - start + 1) - start;
 }
 
-ball create(float x, float y, float Velx, float Vely, float radius, unsigned int color)
+void ball::create(float a_x, float a_y, float a_radius, unsigned int a_color)
 {
-	ball retval;
-	retval.x = x;
-	retval.y = y;
-	retval.Velx = randRange(35, 45);
-	retval.Vely = randRange(4, 7);
-	retval.radius = radius;
-	retval.color = color;
-	return retval;
+	
+	a_x = x;
+	a_y = y;
+	Velx = randRange(35, 45);
+	Vely = randRange(4, 7);
+	a_radius = radius;
+	a_color = color;
+	
 }
 
-void drawBall(const ball &b)
+void ball::drawBall()
 {
-	sfw::drawCircle(b.x, b.y, b.radius, 12, b.color);
+	sfw::drawCircle(x, y, radius, 12, color);
 }
 
-void updateBall(ball &b, ball &b2,player &p1, player &p2)
+void ball::updateBall(player &p1, player &p2)
 {
-	b.x += b.Velx;
-	b.y += b.Vely;
-	if (b.y > 600 - b.radius)
+	x += Velx;
+	y += Vely;
+	if (y > 600 - radius)
 	{
-		b.y = 600 - b.radius;
-		b.Vely *= -1;
+		y = 600 - radius;
+		Vely *= -1;
 	}
-	if (b.y < 0)
+	if (y < 0)
 	{
-		b.y = 0;
-		b.Vely *= -1;
+		y = 0;
+		Vely *= -1;
 	}
 
-	if (b.x < 0)
+	if (x < 0)
 	{
 		p1.score++;
 
 		printf("%d to %d \n", p1.score, p2.score);
-		b.x = 30;
-		b.y = 300;
+		x = 30;
+		y = 300;
 
-		b.x = 300;
-		b.y = 300;
+		x = 300;
+		y = 300;
 	}
-	if (b.x > 600)
+	if (x > 600)
 	{
 		p2.score++;
 		printf("%d to %d \n", p1.score, p2.score);
-		b.x = 770;
-		b.y = 300;
+		x = 770;
+		y = 300;
 
-		b.x = 300;
-		b.y = 300;
+		x = 300;
+		y = 300;
 	}
 
-	b2.x += b2.Velx;
-	b2.y += b2.Vely;
-	if (b2.y > 600 - b2.radius)
+	x += Velx;
+	y += Vely;
+	if (y > 600 - radius)
 	{
-		b2.y = 600 - b2.radius;
-		b2.Vely *= -1;
+		y = 600 - radius;
+		Vely *= -1;
 	}
-	if (b2.y < 0)
+	if (y < 0)
 	{
-		b2.y = 0;
-		b2.Vely *= -1;
+		y = 0;
+		Vely *= -1;
 	}
 
-	if (b2.x < 0)
+	if (x < 0)
 	{
 		p1.score++;
 
 		printf("%d to %d \n", p1.score, p2.score);
-		b2.x = 30;
-		b2.y = 300;
+		x = 30;
+		y = 300;
 
-		b2.x = 300;
-		b2.y = 300;
+		x = 300;
+		y = 300;
 	}
-	if (b2.x > 600)
+	if (x > 600)
 	{
 		p2.score++;
 		printf("%d to %d \n", p1.score, p2.score);
-		b2.x = 770;
-		b2.y = 300;
+		x = 770;
+		y = 300;
 
-		b2.x = 300;
-		b2.y = 300;
+		x = 300;
+		y = 300;
 	}
 
+	if (x - radius < p1.X && y > p1.Y && y < (p1.Y + p1.size))
+	{
+		Velx *= -1;
+		x = p1.X + radius;
+	}
+	if (x + radius > p2.X && y > p2.Y && y < (p2.Y + p2.size))
+	{
+		Velx *= -1;
+		x = p2.X - radius;
+	}
 
+	/*if (x - radius < p1.X && y > p1.Y && y < (p1.Y + p1.size))
+	{
+		Velx *= -1;
+		x = p1.X + radius;
+	}
+	if (x + radius > p2.X && y > p2.Y && y < (p2.Y + p2.size))
+	{
+		Velx *= -1;
+		x = p2.X - radius;
+	}
+*/
 
 }
