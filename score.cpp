@@ -20,3 +20,4 @@ void drawWin2(unsigned font)
 {
 	sfw::drawString(font, " Game Over Player 2 Wins!", 50, 500, 20, 20);
 }
+

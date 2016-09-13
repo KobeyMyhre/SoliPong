@@ -27,7 +27,7 @@ void drawBall(const ball &b)
 	sfw::drawCircle(b.x, b.y, b.radius, 12, b.color);
 }
 
-void updateBall(ball &b, player &p1, player &p2)
+void updateBall(ball &b, ball &b2,player &p1, player &p2)
 {
 	b.x += b.Velx;
 	b.y += b.Vely;
@@ -64,6 +64,40 @@ void updateBall(ball &b, player &p1, player &p2)
 		b.y = 300;
 	}
 
+	b2.x += b2.Velx;
+	b2.y += b2.Vely;
+	if (b2.y > 600 - b2.radius)
+	{
+		b2.y = 600 - b2.radius;
+		b2.Vely *= -1;
+	}
+	if (b2.y < 0)
+	{
+		b2.y = 0;
+		b2.Vely *= -1;
+	}
+
+	if (b2.x < 0)
+	{
+		p1.score++;
+
+		printf("%d to %d \n", p1.score, p2.score);
+		b2.x = 30;
+		b2.y = 300;
+
+		b2.x = 300;
+		b2.y = 300;
+	}
+	if (b2.x > 600)
+	{
+		p2.score++;
+		printf("%d to %d \n", p1.score, p2.score);
+		b2.x = 770;
+		b2.y = 300;
+
+		b2.x = 300;
+		b2.y = 300;
+	}
 
 
 

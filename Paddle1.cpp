@@ -27,7 +27,7 @@ void updatPaddle(player &p)
 	if (p.Y < 0) p.Y = 0;
 }
 
-void collision(ball &b, player &p1, player &p2)
+void collision(ball &b, ball &b2, player &p1, player &p2)
 {
 	if (b.x - b.radius < p1.X && b.y > p1.Y && b.y < (p1.Y + p1.size))
 	{
@@ -39,6 +39,19 @@ void collision(ball &b, player &p1, player &p2)
 		b.Velx *= -1;
 		b.x = p2.X - b.radius;
 	}
+
+	if (b2.x - b2.radius < p1.X && b2.y > p1.Y && b2.y < (p1.Y + p1.size))
+	{
+		b2.Velx *= -1;
+		b2.x = p1.X + b2.radius;
+	}
+	if (b2.x + b2.radius > p2.X && b2.y > p2.Y && b2.y < (p2.Y + p2.size))
+	{
+		b2.Velx *= -1;
+		b2.x = p2.X - b2.radius;
+	}
+	
+	
 }
 
 

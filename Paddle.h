@@ -6,7 +6,7 @@ struct player
 {
 	float Y = 10;
 	float X = 10;
-	float size = 150;
+	float size = 200;
 	char up;
 	char down;
 	unsigned int color;
@@ -15,5 +15,5 @@ struct player
 
 player createPaddle(float Y, float X, float size, char up, char down, unsigned int color);
 void updatPaddle(player &p);
-void collision(ball &b, player &p1, player &p2);
+void collision(ball &b,ball &b2, player &p1, player &p2);
 void drawPaddle(const player &p);

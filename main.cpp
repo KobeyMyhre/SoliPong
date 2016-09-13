@@ -16,15 +16,24 @@ using namespace sfw;
 void main()
 {
 	sfw::initContext(600, 600, "PUNISHMENT PONG");
-	sfw::setBackgroundColor(WHITE);
+	
 
 	GameState gs = createGameState();
 
 	while (sfw::stepContext())
 	{
-	updateGameState(gs);
+		if (gs.GameOver == false)
+		{
+			updateGameState(gs);
 
-	drawGameState(gs);
+
+			drawGameState(gs);
+		}
+		else
+		{
+			sfw::setBackgroundColor(BLACK);
+			sfw::drawString(gs.d , "PLEASE INSERT 50 CREDITS TO CONTINUE", 30, 300, 15, 15,BLUE,0, GREEN);
+		}
 	}
 	sfw::termContext();
 }

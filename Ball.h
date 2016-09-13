@@ -15,4 +15,4 @@ struct ball
 };
 ball create(float x, float y, float Velx, float Vely, float radius, unsigned int color);
 void drawBall(const ball &b);
-void updateBall(ball &b, player &p1, player &p2);
+void updateBall(ball &b, ball &b2 ,player &p1, player &p2);
