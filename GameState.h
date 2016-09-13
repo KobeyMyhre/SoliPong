@@ -99,7 +99,42 @@ void drawGameState(const GameState &gs)
 	if (gs.p2.score >= 25)
 	{
 		sfw::drawLine(5, 220, 5, 100, RED);
-	}*/
+	}
+	
+Boundary:
+	x, y1, y2
+
+	draw()
+
+GameState:
+	Boundary bounds[10]
+	int nActiveBounds = 0
+
+
+	init()
+		bounds = {...}
+
+	draw()
+		for each bounds < nActiveBounds:
+			bounds.draw()
+
+	update()
+		for each bounds < nActiveBounds:
+			ball.checkBoundary(bounds)
+
+
+ball:
+	checkBoundary(bounds)
+
+
+
+	could be tricky->
+		
+		lastX = pos.x-vel.x
+		
+		lastX < bounds.x && bounds.x < pos.x && between y's
+	
+	*/
 
 
 }
