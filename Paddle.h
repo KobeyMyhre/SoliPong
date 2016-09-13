@@ -21,9 +21,9 @@ class ball;
 class player
 {
 public:
-	float Y = 10;
-	float X = 10;
-	float size = 200;
+	float Y;
+	float X;
+	float size;
 	char up;
 	char down;
 	unsigned int color;

@@ -15,11 +15,14 @@
 
 void main()
 {
-	sfw::initContext(600, 600, "PUNISHMENT PONG");
+	sfw::initContext(1200, 600, "PUNISHMENT PONG");
 	int	d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
 	int r = sfw::loadTextureMap("./res/background.jpg");
 
 	GameState gs;
+	gs.font = d;
+	gs.d = d;
+	gs.r = r;
 
 
 	gs.createGameState();
@@ -36,7 +39,7 @@ void main()
 		else
 		{
 			sfw::setBackgroundColor(BLACK);
-			sfw::drawString(d, "PLEASE INSERT 50 CREDITS TO CONTINUE", 30, 300, 15, 15,BLUE,0, GREEN);
+			sfw::drawString(d, "PLEASE INSERT 50 CREDITS TO CONTINUE", 330, 300, 15, 15,BLUE,0, GREEN);
 		}
 	}
 	sfw::termContext();

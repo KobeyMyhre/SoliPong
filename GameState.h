@@ -7,7 +7,7 @@
 class GameState
 {
 public:
-	player p1, p2;
+	player p1, p2, p3, p4;
 	ball b1, b2;
 	int score;
 	unsigned d, r;

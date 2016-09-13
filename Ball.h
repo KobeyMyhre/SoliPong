@@ -21,8 +21,8 @@ class player;
 class ball
 {
 public:
-	float x = 300;
-	float y = 300;
+	float x ;
+	float y ;
 	float Velx;
 	float Vely;
 	float radius;
@@ -31,4 +31,6 @@ public:
 	void create(float x, float y, float radius, unsigned int color);
 	void drawBall();
 	void updateBall(player &p1, player &p2);
+	void updateLeftwall(player &p3);
+	void updateRightwall(player &p4);
 };

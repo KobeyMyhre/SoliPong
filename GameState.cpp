@@ -6,11 +6,12 @@ void GameState::createGameState()
 
 
 	p1.createPaddle(300, 10, 150, 'W', 'S', GREEN);
-	p2.createPaddle(300, 590, 150, 'I', 'K', RED);
+	p2.createPaddle(300, 1190, 150, 'I', 'K', RED);
+	p3.createPaddle(300, 595, 600,'Y' ,'T' ,BLUE);
+	p4.createPaddle(300, 605, 600, 'G', 'H', BLUE);
 
-
-	b1.create(400, 200, 20, CYAN);
-	b2.create(200, 400, 20, WHITE);
+	b1.create(950, 400, 20, CYAN);
+	b2.create(150, 400, 20, WHITE);
 	//f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
 	
 
@@ -24,17 +25,20 @@ void GameState::updateGameState()
 {
 	p1.updatPaddle();
 	p2.updatPaddle();
-	b1.updateBall(p1,p2);
+	p3.updatPaddle();
+	p4.updatPaddle();
+	b1.updateBall(p1, p2);
 	b2.updateBall(p1, p2);
-	
+	b1.updateLeftwall(p3);
+	b2.updateRightwall(p4);
 
-	if (p1.score >= 50)
+	if (p1.score >= 25)
 	{
 		winner = 0;
 		GameOver = true;
 	}
 
-	if (p2.score >= 50)
+	if (p2.score >= 25)
 	{
 		winner = 1;
 		GameOver = true;
@@ -46,7 +50,7 @@ void GameState::drawGameState()
 
 
 
-	sfw::drawTexture(r, 0, 600, 600, 600, 0, false, 0, YELLOW);
+	sfw::drawTexture(r, 0, 600, 1200, 600, 0, false, 0, YELLOW);
 
 	drawScore(d, p1.score, p2.score);
 
@@ -56,12 +60,14 @@ void GameState::drawGameState()
 		drawWin2(d);
 
 	p1.drawPaddle();
-	p1.drawPaddle();
+	p2.drawPaddle();
+	p3.drawPaddle();
+	p4.drawPaddle();
 	b1.drawBall();
 	b2.drawBall();
 
 
-	sfw::drawLine(300, 0, 300, 600, BLUE);
+	//sfw::drawLine(600, 0, 600, 600, BLUE);
 
 
 	/*if (p2.score >= 25)
