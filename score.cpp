@@ -12,12 +12,12 @@ void drawScore(unsigned font, int p1score, int p2score)
 	sprintf_s(buffer, "%d", p2score);
 	sfw::drawString(font, buffer, 500, 600, 40, 40);
 }
-void drawWin(unsigned font)
-{
-	sfw::drawString(font, "Game Over Player 1 Wins!", 400, 500, 20, 20);
-}
-void drawWin2(unsigned font)
-{
-	sfw::drawString(font, " Game Over Player 2 Wins!", 400, 500, 20, 20);
-}
+//void drawWin(unsigned font)
+//{
+//	sfw::drawString(font, "Game Over Player 1 Wins!", 400, 500, 20, 20);
+//}
+//void drawWin2(unsigned font)
+//{
+//	sfw::drawString(font, " Game Over Player 2 Wins!", 400, 500, 20, 20);
+//}
 

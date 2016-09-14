@@ -7,6 +7,10 @@
 #include "Ball.h"
 #include "Score.h"
 #include "GameState.h"
+#include "menuestate.h"
+#include "option.h"
+#include "splash.h"
+#include "depart.h"
 
 //using sfw::drawTexture;
 //sfw::drawTexture();
@@ -20,6 +24,18 @@ void main()
 	int r = sfw::loadTextureMap("./res/background.jpg");
 
 	GameState gs;
+
+	splash splash;
+	depart depart;
+	option option;
+
+	splash.init(d);
+	depart.init(d);
+	option.init(d);
+
+	menueState state = Enter_Splash;
+	gs.createGameState();
+
 	gs.font = d;
 	gs.d = d;
 	gs.r = r;
@@ -29,7 +45,44 @@ void main()
 
 	while (sfw::stepContext())
 	{
-		if (gs.GameOver == false)
+		switch (state)
+		{
+		case Enter_Option:
+			option.play();
+		case Option:
+			option.step();
+			option.draw();
+			state = option.next();
+			break;
+
+		case Enter_Splash:
+			splash.play();
+		case Splash:
+			splash.step();
+			splash.draw();
+			state = splash.next();
+			break;
+
+		case Enter_Depart:
+			depart.play();
+		case Depart:
+			depart.step();
+			depart.draw();
+			state = depart.next();
+			break;
+
+
+		case Enter_Game:
+			//gs.isGameOver();
+			gs.createGameState();
+		case Game:
+			gs.updateGameState();
+			gs.drawGameState();
+			state = gs.nextAppState();
+		}
+
+	}
+		/*if (gs.GameOver == false)
 		{
 			gs.updateGameState();
 
@@ -41,7 +94,7 @@ void main()
 			sfw::setBackgroundColor(BLACK);
 			sfw::drawString(d, "PLEASE INSERT 50 CREDITS TO CONTINUE", 330, 300, 15, 15,BLUE,0, GREEN);
 		}
-	}
+	}*/
 	sfw::termContext();
 }
 

@@ -3,7 +3,7 @@
 #include "Ball.h"
 #include "sfwdraw.h"
 #include "Score.h"
-
+#include "menuestate.h"
 class GameState
 {
 public:
@@ -18,6 +18,8 @@ public:
 	void createGameState();
 	void updateGameState();
 	void drawGameState();
+	menueState GameState::nextAppState();
+	bool isGameOver() { return GameOver; }
 };
 
 

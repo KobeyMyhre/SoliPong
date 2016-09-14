@@ -54,10 +54,10 @@ void GameState::drawGameState()
 
 	drawScore(d, p1.score, p2.score);
 
-	if (winner == 0)
+	/*if (winner == 0)
 		drawWin(d);
 	else if (winner == 1)
-		drawWin2(d);
+		drawWin2(d);*/
 
 	p1.drawPaddle();
 	p2.drawPaddle();
@@ -65,7 +65,13 @@ void GameState::drawGameState()
 	p4.drawPaddle();
 	b1.drawBall();
 	b2.drawBall();
-
+}
+	menueState GameState::nextAppState()
+	{
+		if (GameOver)
+			return Enter_Depart;
+		else return Game;
+	}
 
 	//sfw::drawLine(600, 0, 600, 600, BLUE);
 
@@ -129,4 +135,3 @@ void GameState::drawGameState()
 	*/
 
 
-}

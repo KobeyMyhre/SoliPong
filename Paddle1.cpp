@@ -12,6 +12,7 @@ void player::createPaddle(float a_Y, float a_X, float a_size, char a_up, char a_
 	Y = a_Y;
 	X = a_X;
 	color = a_color;	
+	score = 0;
 }
 
 void player::updatPaddle()
