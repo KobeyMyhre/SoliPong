@@ -1,6 +1,6 @@
 #include "GameState.h"
-
-
+#include "sfwdraw.h"
+#include <iostream>
 void GameState::createGameState()
 {
 
@@ -18,7 +18,8 @@ void GameState::createGameState()
 	p1.score;
 	p2.score;
 	GameOver = false;
-	
+	p1.Tricks;
+	p2.Tricks;
 }
 
 void GameState::updateGameState()
@@ -35,13 +36,13 @@ void GameState::updateGameState()
 	b2.TricksAndShit();
 	p1.TricksAndShitBallOne(b1);
 	p2.TricksAndShitBallTwo(b2);
-	if (p1.score >= 25)
+	if (p1.score >= 50)
 	{
 		winner = 0;
 		GameOver = true;
 	}
 
-	if (p2.score >= 25)
+	if (p2.score >= 50)
 	{
 		winner = 1;
 		GameOver = true;
@@ -68,6 +69,15 @@ void GameState::drawGameState()
 	p4.drawPaddle();
 	b1.drawBall();
 	b2.drawBall();
+
+
+	char buffer[64] = { 0 };
+	sprintf_s(buffer, "Tricks: %d", p1.Tricks);
+	sfw::drawString(font, buffer, 50, 500, 20, 20);
+
+	sprintf_s(buffer, "Tricks: %d", p2.Tricks);
+	sfw::drawString(font, buffer, 1000, 500, 20, 20);
+
 }
 	menueState GameState::nextAppState()
 	{

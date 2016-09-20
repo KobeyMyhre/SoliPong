@@ -31,6 +31,8 @@ public:
 	int Tricks;
 	char Shit;
 
+	float ShitTimer = 1.0f;
+
 	/*void score();*/
 	void createPaddle(float Y, float X, float size, char up, char down, unsigned int color, int Tricks, char Shit);
 	void TricksAndShitBallOne(ball &b1);
@@ -38,4 +40,5 @@ public:
 	void updatePaddle();
 	void drawPaddle();
 	void updatePaddlecolor();
+	
 };

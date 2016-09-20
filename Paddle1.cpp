@@ -20,11 +20,13 @@ void player::TricksAndShitBallOne(ball &b1)
 {
 	if (Tricks > 0)
 	{
-		if (sfw::getKey(Shit))
+		if (sfw::getKey(Shit) && ShitTimer <= 0.0f)
 		{
 			b1.Vely *= 1.5;
 			b1.Velx *= 1.5;
-			Tricks--;
+			Tricks -= 1;
+
+			ShitTimer = 1.0f;
 		}
 	}
 }
@@ -32,18 +34,21 @@ void player::TricksAndShitBallTwo(ball &b2)
 {
 	if (Tricks > 0)
 	{
-		if (sfw::getKey(Shit))
+		if (sfw::getKey(Shit) && ShitTimer <= 0.0f)
 		{
 			b2.Vely *= 1.5;
 			b2.Velx *= 1.5;
-			Tricks--;
+			Tricks -= 1;
+
+			ShitTimer = 1.0f;
 		}
 	}
 }
 	
 void player::updatePaddle()
 {
-
+	ShitTimer -= sfw::getDeltaTime();
+	
 
 	if (sfw::getKey(up))
 		Y += 15;
@@ -69,6 +74,7 @@ void player::updatePaddlecolor()
 	else
 		color = GREEN;
 }
+
 
 void player::drawPaddle()
 {
