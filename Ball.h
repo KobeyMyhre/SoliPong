@@ -27,10 +27,14 @@ public:
 	float Vely;
 	float radius;
 	unsigned int color;
+	
 
 	void create(float x, float y, float radius, unsigned int color);
 	void drawBall();
 	void updateBall(player &p1, player &p2);
 	void updateLeftwall(player &p3);
 	void updateRightwall(player &p4);
+	void updateBallcolor();
+	void TricksAndShit();
+	
 };

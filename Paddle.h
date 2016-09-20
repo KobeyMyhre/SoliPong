@@ -28,9 +28,14 @@ public:
 	char down;
 	unsigned int color;
 	int score = 0;
+	int Tricks;
+	char Shit;
 
 	/*void score();*/
-	void createPaddle(float Y, float X, float size, char up, char down, unsigned int color);
-	void updatPaddle();
+	void createPaddle(float Y, float X, float size, char up, char down, unsigned int color, int Tricks, char Shit);
+	void TricksAndShitBallOne(ball &b1);
+	void TricksAndShitBallTwo(ball &b2);
+	void updatePaddle();
 	void drawPaddle();
+	void updatePaddlecolor();
 };

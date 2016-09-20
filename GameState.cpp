@@ -5,13 +5,13 @@ void GameState::createGameState()
 {
 
 
-	p1.createPaddle(300, 10, 150, 'W', 'S', GREEN);
-	p2.createPaddle(300, 1190, 150, 'I', 'K', RED);
-	p3.createPaddle(300, 595, 600,'Y' ,'T' ,BLUE);
-	p4.createPaddle(300, 605, 600, 'G', 'H', BLUE);
+	p1.createPaddle(300, 10, 150, 'W', 'S', GREEN,3,'X');
+	p2.createPaddle(300, 1190, 150, 'I', 'K', RED,3, 'M');
+	p3.createPaddle(300, 595, 600,'Y' ,'Y' ,BLUE,0, 'Y');
+	p4.createPaddle(300, 605, 600, 'Y', 'Y', MAGENTA,0, 'Y');
 
-	b1.create(950, 400, 20, CYAN);
-	b2.create(150, 400, 20, WHITE);
+	b1.create(300, 300, 20, CYAN);
+	b2.create(900, 300, 20, WHITE);
 	//f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
 	
 
@@ -23,15 +23,18 @@ void GameState::createGameState()
 
 void GameState::updateGameState()
 {
-	p1.updatPaddle();
-	p2.updatPaddle();
-	p3.updatPaddle();
-	p4.updatPaddle();
+	p1.updatePaddle();
+	p2.updatePaddle();
+	p3.updatePaddle();
+	p4.updatePaddle();
 	b1.updateBall(p1, p2);
 	b2.updateBall(p1, p2);
 	b1.updateLeftwall(p3);
 	b2.updateRightwall(p4);
-
+	b1.TricksAndShit();
+	b2.TricksAndShit();
+	p1.TricksAndShitBallOne(b1);
+	p2.TricksAndShitBallTwo(b2);
 	if (p1.score >= 25)
 	{
 		winner = 0;
@@ -50,7 +53,7 @@ void GameState::drawGameState()
 
 
 
-	sfw::drawTexture(r, 0, 600, 1200, 600, 0, false, 0, YELLOW);
+	//sfw::drawTexture(r, 0, 600, 1200, 600, 0, false, 0, WHITE);
 
 	drawScore(d, p1.score, p2.score);
 

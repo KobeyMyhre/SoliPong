@@ -21,7 +21,7 @@ void main()
 {
 	sfw::initContext(1200, 600, "PUNISHMENT PONG");
 	int	d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
-	int r = sfw::loadTextureMap("./res/background.jpg");
+	//int r = sfw::loadTextureMap("./res/background.jpg");
 
 	GameState gs;
 
@@ -38,7 +38,7 @@ void main()
 
 	gs.font = d;
 	gs.d = d;
-	gs.r = r;
+	//gs.r = r;
 
 
 	gs.createGameState();
@@ -64,7 +64,7 @@ void main()
 			break;
 
 		case Enter_Depart:
-			depart.play();
+			depart.play(gs.winner);
 		case Depart:
 			depart.step();
 			depart.draw();

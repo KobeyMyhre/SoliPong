@@ -9,6 +9,34 @@ float randRange(int start, int end)
 	srand(time(0));
 	return rand() % (end - start + 1) - start;
 }
+void ball::updateBallcolor()
+{
+	if (color == GREEN)
+		color = BLUE;
+	else if (color == BLUE)
+		color = YELLOW;
+	else if (color == YELLOW)
+		color = RED;
+	else if (color == RED)
+		color = CYAN;
+	else if (color == CYAN)
+		color = MAGENTA;
+	else if (color == MAGENTA)
+		color = WHITE;
+	else if (color == WHITE)
+		color = NONE;
+	else
+		color = GREEN;
+}
+void ball::TricksAndShit()
+{
+	if (sfw::getKey(' '))
+	{
+		Vely *= -1;
+		Velx *= -1;
+	}
+		
+}
 
 void ball::create(float a_x, float a_y, float a_radius, unsigned int a_color)
 {
@@ -16,7 +44,7 @@ void ball::create(float a_x, float a_y, float a_radius, unsigned int a_color)
 	x = a_x;
 	y = a_y;
 	Velx = randRange(30, 35); //30, 35
-	Vely = randRange(4, 7);		// 4,7
+	Vely = randRange(8, 17);		// 4,7
 	radius = a_radius ;
 	color = a_color;
 	
@@ -35,32 +63,38 @@ void ball::updateBall(player &p1, player &p2)
 	{
 		y = 600 - radius;
 		Vely *= -1;
+		updateBallcolor();
+
 	}
 	if (y < 0)
 	{
 		y = 0;
 		Vely *= -1;
+		updateBallcolor();
 	}
 
 	if (x < 0)
 	{
 		p1.score++;
-
+		Velx = randRange(30, 35);
+		Vely = randRange(8, 17);
 		//printf("%d to %d \n", p1.score, p2.score);
 		/*x = 30;
 		y = 300;*/
-
-		x = 750;
+		updateBallcolor();
+		x = 300;
 		y = 300;
 	}
 	if (x > 1200)
 	{
 		p2.score++;
+		Velx = randRange(30, 35);
+		Vely = randRange(8, 17);
 		//printf("%d to %d \n", p1.score, p2.score);
 	/*	x = 770;
 		y = 300;*/
-
-		x = 250;
+		updateBallcolor();
+		x = 900;
 		y = 300;
 	}
 
@@ -69,12 +103,17 @@ void ball::updateBall(player &p1, player &p2)
 	if (x - radius < p1.X && y > p1.Y && y < (p1.Y + p1.size))
 	{
 		Velx *= -1;
-		x = p1.X + radius;
+		x = p1.X + radius; 
+		updateBallcolor();
+		p1.updatePaddlecolor();
+		
 	}
 	if (x + radius > p2.X && y > p2.Y && y < (p2.Y + p2.size))
 	{
 		Velx *= -1;
 		x = p2.X - radius;
+		updateBallcolor();
+		p2.updatePaddlecolor();
 	}
 }
 void ball::updateLeftwall(player & p3)
@@ -85,6 +124,7 @@ void ball::updateLeftwall(player & p3)
 	{
 		Velx *= -1;
 		x = p3.X + radius;
+		p3.updatePaddlecolor();
 	}
 	
 	
@@ -96,5 +136,6 @@ void ball::updateRightwall(player & p4)
 	{
 		Velx *= -1;
 		x = p4.X - radius;
+		p4.updatePaddlecolor();
 	}
 }
