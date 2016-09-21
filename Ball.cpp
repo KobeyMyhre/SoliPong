@@ -39,8 +39,8 @@ void ball::InitSpawnTwo()
 	initBallRespawn -= sfw::getDeltaTime();
 	if (color == BLACK)
 	{
-		x = 900;
-		y = 300;
+		/*x = 900;
+		y = 300;*/
 		Velx = 0;
 		Vely = 0;
 		if (initBallRespawn <= 0.0f)
@@ -49,7 +49,7 @@ void ball::InitSpawnTwo()
 			Vely = randRange(10, 15);
 			ballRespawn = 1.0f;
 			color = RED;
-			isScored = false;
+			
 		}
 
 	}
@@ -60,8 +60,8 @@ void ball::InitSpawnOne()
 	initBallRespawn -= sfw::getDeltaTime();
 	if (color == BLACK)
 	{
-		x = 300;
-		y = 300;
+		/*x = 300;
+		y = 300;*/
 		Velx = 0;
 		Vely = 0;
 		if (initBallRespawn <= 0.0f)
@@ -70,7 +70,7 @@ void ball::InitSpawnOne()
 			Vely = randRange(10, 15);
 			
 			color = RED;
-			isScored = false;
+			
 		}
 
 	}

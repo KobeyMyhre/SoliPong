@@ -27,8 +27,7 @@ void GameState::createGameState()
 void GameState::updateGameState()
 {
 
-	b1.InitSpawnOne();
-	b2.InitSpawnTwo();
+	
 	p1.updatePaddle();
 	p2.updatePaddle();
 	p3.updatePaddle();
@@ -41,6 +40,8 @@ void GameState::updateGameState()
 	b2.TricksAndShit();
 	p1.TricksAndShitBallOne(b1);
 	p2.TricksAndShitBallTwo(b2);
+	b1.InitSpawnOne();
+	b2.InitSpawnTwo();
 	if (p1.score >= 20)
 	{
 		winner = 0;
