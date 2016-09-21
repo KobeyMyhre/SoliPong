@@ -11,7 +11,7 @@
 #include "option.h"
 #include "splash.h"
 #include "depart.h"
-
+#include "Instruct.h"
 //using sfw::drawTexture;
 //sfw::drawTexture();
 
@@ -21,24 +21,26 @@ void main()
 {
 	sfw::initContext(1200, 600, "PUNISHMENT PONG");
 	int	d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
-	//int r = sfw::loadTextureMap("./res/background.jpg");
+	//int r = sfw::loadTextureMap("./res/PongBackground.png");
 
 	GameState gs;
 
 	splash splash;
 	depart depart;
 	option option;
+	instruct instruct;
 
 	splash.init(d);
 	depart.init(d);
 	option.init(d);
+	instruct.init(d);
 
 	menueState state = Enter_Splash;
 	gs.createGameState();
 
 	gs.font = d;
 	gs.d = d;
-	//gs.r = r;
+	/*gs.r = r;*/
 
 
 	gs.createGameState();
@@ -47,6 +49,7 @@ void main()
 	{
 		switch (state)
 		{
+			
 		case Enter_Option:
 			option.play();
 		case Option:
@@ -61,6 +64,14 @@ void main()
 			splash.step();
 			splash.draw();
 			state = splash.next();
+			break;
+
+		case Enter_Instruct:
+			instruct.play();
+		case Instruct:
+			instruct.step();
+			instruct.draw();
+			state = instruct.next();
 			break;
 
 		case Enter_Depart:

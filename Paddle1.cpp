@@ -22,8 +22,7 @@ void player::TricksAndShitBallOne(ball &b1)
 	{
 		if (sfw::getKey(Shit) && ShitTimer <= 0.0f)
 		{
-			b1.Vely *= 1.5;
-			b1.Velx *= 1.5;
+			b1.color = NONE;
 			Tricks -= 1;
 
 			ShitTimer = 1.0f;
@@ -36,8 +35,7 @@ void player::TricksAndShitBallTwo(ball &b2)
 	{
 		if (sfw::getKey(Shit) && ShitTimer <= 0.0f)
 		{
-			b2.Vely *= 1.5;
-			b2.Velx *= 1.5;
+			b2.color = NONE;
 			Tricks -= 1;
 
 			ShitTimer = 1.0f;
@@ -51,9 +49,9 @@ void player::updatePaddle()
 	
 
 	if (sfw::getKey(up))
-		Y += 15;
+		Y += 20;
 	if (sfw::getKey(down))
-		Y -= 15;
+		Y -= 20;
 	if (Y > 600 - size) Y = 600 - size;
 	if (Y < 0) Y = 0;
 }

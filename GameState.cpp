@@ -1,19 +1,21 @@
 #include "GameState.h"
 #include "sfwdraw.h"
 #include <iostream>
+#include <random>
+#include <time.h>
 void GameState::createGameState()
 {
+	srand(time(0));
 
-
-	p1.createPaddle(300, 10, 150, 'W', 'S', GREEN,3,'X');
-	p2.createPaddle(300, 1190, 150, 'I', 'K', RED,3, 'M');
+	p1.createPaddle(300, 10, 175, 'W', 'S', GREEN,3,'X');
+	p2.createPaddle(300, 1190, 175, 'I', 'K', RED,3, 'M');
 	p3.createPaddle(300, 595, 600,'Y' ,'Y' ,BLUE,0, 'Y');
 	p4.createPaddle(300, 605, 600, 'Y', 'Y', MAGENTA,0, 'Y');
 
-	b1.create(300, 300, 20, CYAN);
-	b2.create(900, 300, 20, WHITE);
+	b1.create(300, 300, 15, BLACK);
+	b2.create(900, 300, 15, BLACK);
 	//f = sfw::loadTextureMap("./res/tonc_font.png", 16, 6);
-	
+	/*int r = sfw::loadTextureMap("./res/PongBackground.jpg");*/
 
 	p1.score;
 	p2.score;
@@ -24,6 +26,9 @@ void GameState::createGameState()
 
 void GameState::updateGameState()
 {
+
+	b1.InitSpawnOne();
+	b2.InitSpawnTwo();
 	p1.updatePaddle();
 	p2.updatePaddle();
 	p3.updatePaddle();
@@ -36,13 +41,13 @@ void GameState::updateGameState()
 	b2.TricksAndShit();
 	p1.TricksAndShitBallOne(b1);
 	p2.TricksAndShitBallTwo(b2);
-	if (p1.score >= 50)
+	if (p1.score >= 20)
 	{
 		winner = 0;
 		GameOver = true;
 	}
 
-	if (p2.score >= 50)
+	if (p2.score >= 20)
 	{
 		winner = 1;
 		GameOver = true;
@@ -53,8 +58,8 @@ void GameState::drawGameState()
 {
 
 
-
-	//sfw::drawTexture(r, 0, 600, 1200, 600, 0, false, 0, WHITE);
+	//int r = sfw::loadTextureMap("./res/PongBackground.png");
+	//sfw::drawTexture(r, 0, 600, 1200, 600, 0, false, 0, 0x88888888);
 
 	drawScore(d, p1.score, p2.score);
 

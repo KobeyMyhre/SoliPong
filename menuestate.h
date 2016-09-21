@@ -7,6 +7,8 @@ enum menueState
 	Depart,
 	Enter_Option,
 	Option,
+	Enter_Instruct,
+	Instruct,
 
 	Enter_Game,
 	Game

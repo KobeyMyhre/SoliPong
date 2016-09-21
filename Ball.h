@@ -27,7 +27,10 @@ public:
 	float Vely;
 	float radius;
 	unsigned int color;
-	
+	float ballRespawn = 1.f;
+	int whichBall;
+	bool isScored = false;
+	float initBallRespawn = 1.f;
 
 	void create(float x, float y, float radius, unsigned int color);
 	void drawBall();
@@ -36,5 +39,6 @@ public:
 	void updateRightwall(player &p4);
 	void updateBallcolor();
 	void TricksAndShit();
-	
+	void InitSpawnOne();
+	void InitSpawnTwo();
 };

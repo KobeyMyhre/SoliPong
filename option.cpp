@@ -13,8 +13,8 @@ void option::play() { select = 0; timer = 3.f; }
 void option::draw()
 {
 
-	sfw::drawString(d, "Press enter to Start a New Game", 100, 100, 20, 20, 0, 0, WHITE);
-
+	sfw::drawString(d, "Press Enter to Start a New Game", 100, 100, 20, 20, 0, 0, WHITE);
+	sfw::drawString(d, "Press I to View Controlls", 100, 300, 20, 20, 0, 0, WHITE);
 	/*sfw::drawString(d, "press 1 tGOTO DEPART", 100, 300, 20, 20, 0, 0,  WHITE);*/
 }
 
@@ -34,6 +34,10 @@ menueState option::next()
 	if (sfw::getKey(KEY_ENTER))
 	{
 		return Enter_Game;
+	}
+	if (sfw::getKey('I'))
+	{
+		return Enter_Instruct;
 	}
 	///*if (sfw::getKey(KEY_ENTER))
 	//{

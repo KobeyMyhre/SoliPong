@@ -6,14 +6,12 @@
 #include <time.h>
 float randRange(int start, int end)
 {
-	srand(time(0));
+	
 	return rand() % (end - start + 1) - start;
 }
 void ball::updateBallcolor()
 {
 	if (color == GREEN)
-		color = BLUE;
-	else if (color == BLUE)
 		color = YELLOW;
 	else if (color == YELLOW)
 		color = RED;
@@ -23,8 +21,6 @@ void ball::updateBallcolor()
 		color = MAGENTA;
 	else if (color == MAGENTA)
 		color = WHITE;
-	else if (color == WHITE)
-		color = NONE;
 	else
 		color = GREEN;
 }
@@ -38,13 +34,55 @@ void ball::TricksAndShit()
 		
 }
 
+void ball::InitSpawnTwo()
+{
+	initBallRespawn -= sfw::getDeltaTime();
+	if (color == BLACK)
+	{
+		x = 900;
+		y = 300;
+		Velx = 0;
+		Vely = 0;
+		if (initBallRespawn <= 0.0f)
+		{
+			Velx = randRange(20, 25);
+			Vely = randRange(10, 15);
+			ballRespawn = 1.0f;
+			color = RED;
+			isScored = false;
+		}
+
+	}
+}
+
+void ball::InitSpawnOne()
+{
+	initBallRespawn -= sfw::getDeltaTime();
+	if (color == BLACK)
+	{
+		x = 300;
+		y = 300;
+		Velx = 0;
+		Vely = 0;
+		if (initBallRespawn <= 0.0f)
+		{
+			Velx = randRange(20, 25);
+			Vely = randRange(10, 15);
+			
+			color = RED;
+			isScored = false;
+		}
+
+	}
+}
+
 void ball::create(float a_x, float a_y, float a_radius, unsigned int a_color)
 {
 	
 	x = a_x;
 	y = a_y;
-	Velx = randRange(30, 35); //30, 35
-	Vely = randRange(8, 17);		// 4,7
+	Velx = randRange(20, 25); 
+	Vely = randRange(10, 15);		
 	radius = a_radius ;
 	color = a_color;
 	
@@ -57,6 +95,13 @@ void ball::drawBall()
 
 void ball::updateBall(player &p1, player &p2)
 {
+	
+
+
+
+
+	if (isScored == true) { ballRespawn -= sfw::getDeltaTime(); color = BLUE; }
+	
 	x += Velx;
 	y += Vely;
 	if (y > 600 - radius)
@@ -76,36 +121,77 @@ void ball::updateBall(player &p1, player &p2)
 	if (x < 0)
 	{
 		p1.score++;
-		Velx = randRange(30, 35);
-		Vely = randRange(8, 17);
+		Velx = randRange(-20, -25);
+		Vely = randRange(10, 15);
 		//printf("%d to %d \n", p1.score, p2.score);
 		/*x = 30;
 		y = 300;*/
-		updateBallcolor();
-		x = 300;
-		y = 300;
+		color = BLUE;
+		whichBall = 1;
+		if (whichBall == 1){isScored = true;}
+			x = 300;
+			y = 300;
+			
 	}
 	if (x > 1200)
 	{
 		p2.score++;
-		Velx = randRange(30, 35);
-		Vely = randRange(8, 17);
+		Velx = randRange(20, 25);
+		Vely = randRange(10, 15);
 		//printf("%d to %d \n", p1.score, p2.score);
 	/*	x = 770;
 		y = 300;*/
-		updateBallcolor();
+		color = BLUE;
+		whichBall = 2;
+		if (whichBall == 2) { isScored = true; }
 		x = 900;
 		y = 300;
+			
 	}
+	if (color == BLUE && whichBall == 1 && isScored == true)
+	{
+		x = 300;
+		y = 300;
+		Velx = 0;
+		Vely = 0;
+		if (ballRespawn <= 0.0f)
+		{
+			Velx = randRange(-20, -25);
+			Vely = randRange(10, 15);
+			ballRespawn = 1.0f;
+			color = RED;
+			isScored = false;
+		}
+		
+	}
+	if (color == BLUE && whichBall == 2 && isScored == true)
+	{
+		x = 900;
+		y = 300;
+		Velx = 0;
+		Vely = 0;
+		if (ballRespawn <= 0.0f)
+		{
+			Velx = randRange(20, 25);
+			Vely = randRange(10, 15);
+			ballRespawn = 1.0f;
+			color = RED;
+			isScored = false;
+		}
+		
 
+	}
 
 
 	if (x - radius < p1.X && y > p1.Y && y < (p1.Y + p1.size))
 	{
+		Velx = randRange(20, 25);
+		Vely = randRange(10, 15);
 		Velx *= -1;
 		x = p1.X + radius; 
 		updateBallcolor();
 		p1.updatePaddlecolor();
+		
 		
 	}
 	if (x + radius > p2.X && y > p2.Y && y < (p2.Y + p2.size))
@@ -114,6 +200,8 @@ void ball::updateBall(player &p1, player &p2)
 		x = p2.X - radius;
 		updateBallcolor();
 		p2.updatePaddlecolor();
+		Velx = randRange(20, 25);
+		Vely = randRange(10, 15);
 	}
 }
 void ball::updateLeftwall(player & p3)

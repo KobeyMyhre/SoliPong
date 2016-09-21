@@ -127,6 +127,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="depart.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Instruct.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="option.cpp" />
     <ClCompile Include="Paddle1.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="depart.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Instruct.h" />
     <ClInclude Include="menuestate.h" />
     <ClInclude Include="option.h" />
     <ClInclude Include="Paddle.h" />
